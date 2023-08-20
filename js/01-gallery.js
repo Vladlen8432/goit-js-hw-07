@@ -15,6 +15,8 @@ galleryItems.forEach((item) => {
   galleryImage.classList.add("gallery-image");
   galleryImage.src = item.preview;
   galleryImage.alt = item.description;
+  galleryImage.style.width = "100%";
+  galleryImage.style.height = "100%";
   galleryImage.setAttribute("data-source", item.original);
 
   galleryLink.appendChild(galleryImage);

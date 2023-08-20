@@ -24,11 +24,9 @@ galleryItems.forEach((item) => {
   galleryList.appendChild(galleryItem);
 });
 
-const lightbox = new SimpleLightbox(".gallery a", {
-  captionsData: "alt",
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
   captionDelay: 250,
   captions: true,
   animationSpeed: 250,
 });
-
-console.log(galleryItems);

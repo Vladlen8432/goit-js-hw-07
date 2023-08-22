@@ -5,28 +5,20 @@ const galleryList = document.querySelector(".gallery");
 
 galleryItems.forEach((item) => {
   const galleryItem = document.createElement("li");
-  galleryItem.classList.add("gallery-item");
+  galleryItem.className = "gallery-item";
 
-  const galleryLink = document.createElement("a");
-  galleryLink.classList.add("gallery-link");
-  galleryLink.href = item.original;
+  galleryItem.innerHTML = `<a class = "gallery-link" href="${item.original}">
+    <img class="gallery-image" src="${item.preview}" alt="${item.description}" style="width: 100%; height: 100%" data-source="${item.original}">
+  </a>`;
 
-  const galleryImage = document.createElement("img");
-  galleryImage.classList.add("gallery-image");
-  galleryImage.src = item.preview;
-  galleryImage.alt = item.description;
-  galleryImage.style.width = "100%";
-  galleryImage.style.height = "100%";
-  galleryImage.setAttribute("data-source", item.original);
-
-  galleryLink.appendChild(galleryImage);
-  galleryItem.appendChild(galleryLink);
   galleryList.appendChild(galleryItem);
 });
 
 galleryList.addEventListener("click", (event) => {
   event.preventDefault();
-  if (event.target.tagName === "IMG") {
+  if (!event.target.tagName === "IMG") {
+    return;
+  } else {
     const imageSource = event.target.getAttribute("data-source");
     const imageAlt = event.target.alt;
     const instance = basicLightbox.create(
@@ -37,11 +29,11 @@ galleryList.addEventListener("click", (event) => {
     const closeModal = (event) => {
       if (event.key === "Escape") {
         instance.close();
-        window.removeEventListener("keydown", closeModal);
+        document.removeEventListener("keydown", closeModal);
       }
     };
 
-    window.addEventListener("keydown", closeModal);
+    document.addEventListener("keydown", closeModal);
   }
 });
 
